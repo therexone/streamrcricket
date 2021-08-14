@@ -1,0 +1,3 @@
+const fetchComments = () => {};
+
+export { fetchComments };
