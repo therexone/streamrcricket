@@ -1,38 +1,54 @@
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 import Emoji from "react-emoji-render";
 
 type TCommentProps = {
   upvoteCount: number;
   userName: string;
   flairText: string;
-  comment: string;
+  commentText: string;
+  createdUTC: number;
 };
 
 const CommentCard = ({
   upvoteCount,
   userName,
   flairText,
-  comment,
-}: TCommentProps) => (
-  <CardContainer>
-    <UpvoteCount>
-      <div>^</div>
-      69
-    </UpvoteCount>
-    <MetaDataWrapper>
-      <Username>therexone </Username>
-      <Flair>
-        <Emoji text=":england: England" />
-      </Flair>
-    </MetaDataWrapper>
-    <Comment>
-      And they now have a bat deeper than our normal deep kind of lineup fuck
-      me..get a wicket please india..
-    </Comment>
-  </CardContainer>
-);
+  commentText,
+  createdUTC,
+}: TCommentProps) => {
+  const timeString = new Date(createdUTC * 1000).toLocaleTimeString();
+  console.log(timeString);
+  return (
+    <CardContainer>
+      <UpvoteCount>
+        <div>^</div>
+        {upvoteCount}
+      </UpvoteCount>
+
+      <MetaDataWrapper>
+        <Username>{userName}</Username>
+        <Flair>{flairText && <Emoji text={flairText.toLowerCase()} />}</Flair>
+        <CommentTime>{timeString}</CommentTime>
+      </MetaDataWrapper>
+
+      <Comment>{commentText}</Comment>
+    </CardContainer>
+  );
+};
+
+export const cardBaseStyles = css`
+  border-radius: 1rem;
+  width: 100%;
+  background-color: #2a2e31;
+  padding: 1.5rem 2rem;
+  margin-bottom: 1.2rem;
+  @media (max-width: 768px) {
+    padding: 1.2rem 1.8rem;
+  }
+`;
 
 const CardContainer = styled.div`
+  ${cardBaseStyles}
   border-radius: 1rem;
   background-color: #2a2e31;
   padding: 1.5rem 2rem;
@@ -42,9 +58,6 @@ const CardContainer = styled.div`
   grid-template-rows: auto;
   width: 100%;
   align-content: center;
-  @media (max-width: 768px) {
-    padding: 1.2rem 1.8rem;
-  }
 `;
 
 const MetaDataWrapper = styled.div`
@@ -71,6 +84,12 @@ const Flair = styled.div`
   margin-top: 0.1rem;
   font-size: 0.8rem;
   margin-left: 0.8rem;
+  color: #ffffffc5;
+`;
+
+const CommentTime = styled.div`
+  margin-left: auto;
+  font-size: 0.8rem;
   color: #ffffffc5;
 `;
 
