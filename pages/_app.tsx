@@ -31,6 +31,7 @@ html {
 
 .stats-markdown {
   color: #ffffffe1;
+  width: 100%;
   h3 {
     font-size: 1.6rem;
     color: #fdbc2c;
@@ -45,6 +46,25 @@ html {
 
   }
   margin-bottom: 1.2rem;
+  table {
+    display: inline-block;
+    margin: 0 0.8rem 0.4rem 0;
+    vertical-align: top;
+    thead {
+      background-color: #2a2e31;
+     
+    }
+    td, th {
+      padding: 0.2rem 0.4rem;
+
+    }
+  }
+  pre{
+    margin-bottom: 1rem;
+  }
+  @media (min-width: 768px) {
+   font-size: 110%;
+  }
 }
 `;
 
@@ -62,10 +82,12 @@ const GlobalWrapper = styled.div`
   flex-direction: column;
   justify-content: center;
   padding: 2rem;
-  max-width: 100rem;
+  max-width: 80rem;
+  width: 100%;
   margin: 0 auto;
   @media (max-width: 768px) {
     padding: 1.2rem;
+    max-width: 100%;
   }
 `;
 

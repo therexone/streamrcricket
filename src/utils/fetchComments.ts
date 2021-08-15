@@ -4,9 +4,15 @@ export type TComment = {
   createdUTC: number;
   author: string;
   upvotes: number;
+  id: string;
 };
 
-const fetchComments = async (threadId: string) => {
+export type TThreadData = {
+  matchStats: string;
+  comments: TComment[];
+};
+
+const fetchComments = async (threadId: string): Promise<TThreadData> => {
   const response = await fetch(
     `https://www.reddit.com/comments/${threadId}.json?sort=new&limit=20`,
     {
@@ -27,9 +33,11 @@ const fetchComments = async (threadId: string) => {
     createdUTC: data.created_utc,
     author: data.author,
     upvotes: data.ups,
+    id: data.id,
   }));
 
-  return { matchStats, comments };
+  // last element has everything undefined
+  return { matchStats, comments: comments.slice(0, -1) };
 };
 
 export { fetchComments };

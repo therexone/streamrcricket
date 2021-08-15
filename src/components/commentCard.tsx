@@ -17,7 +17,6 @@ const CommentCard = ({
   createdUTC,
 }: TCommentProps) => {
   const timeString = new Date(createdUTC * 1000).toLocaleTimeString();
-  console.log(timeString);
   return (
     <CardContainer>
       <UpvoteCount>
@@ -39,6 +38,7 @@ const CommentCard = ({
 export const cardBaseStyles = css`
   border-radius: 1rem;
   width: 100%;
+  max-width: 100%;
   background-color: #2a2e31;
   padding: 1.5rem 2rem;
   margin-bottom: 1.2rem;
