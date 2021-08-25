@@ -61,13 +61,14 @@ const MatchInfoContainer = styled.div<{ pinned: boolean }>`
       margin: 0;
     }
     p:last-of-type {
+      width: max-content;
       background-color: #fdbb2c4b;
       padding: 0.4rem;
       border-radius: 0.5rem;
       color: #fdbc2c;
       text-align: center;
     }
-    margin-bottom: 1.2rem;
+    /* margin-bottom: 1.2rem; */
     table {
       display: inline-block;
       margin: 0 0.8rem 0.4rem 0;
@@ -94,7 +95,7 @@ const PinStats = styled.div<{ pinned: boolean }>`
   margin-top: 0.3rem;
 
   svg {
-    fill: ${props => props.pinned ? '#ffffffc0' : '#ffffff44'} ;
+    fill: ${(props) => (props.pinned ? "#ffffffc0" : "#ffffff44")};
   }
 `;
 

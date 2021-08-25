@@ -40,7 +40,7 @@ const Tag = styled.span<{ type: TTagTypes }>`
   margin-right: 0.5rem;
 `;
 
-const MatchThreads = ({ threads }: { threads: TThreadsDataType[] }) => {
+const Matches = ({ threads }: { threads: TThreadsDataType[] }) => {
   const router = useRouter();
 
   if (threads.length === 0) {
@@ -83,4 +83,4 @@ const MatchThreads = ({ threads }: { threads: TThreadsDataType[] }) => {
   );
 };
 
-export default MatchThreads;
+export default Matches;

@@ -1,10 +1,11 @@
 import { useRouter } from "next/router";
 import React, { useEffect, useRef, useState } from "react";
 import { useQuery } from "react-query";
+import dynamic from "next/dynamic";
 
 import Header from "../../src/components/header";
 import Loading from "../../src/components/loading";
-import CommentsThread from "../../src/containers/commentsThread";
+const CommentsThread = dynamic(import("../../src/containers/commentsThread"));
 import { fetchComments, TComment } from "../../src/utils/fetchComments";
 
 const ThreadPage = () => {

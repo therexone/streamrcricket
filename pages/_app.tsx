@@ -11,6 +11,7 @@ const GlobalStyle = createGlobalStyle`
 
   background-color: #212528;
   color: white;
+  scroll-behavior: smooth;
 
 }
 
@@ -48,7 +49,7 @@ const GlobalWrapper = styled.div`
   width: 100%;
   margin: 0 auto;
   @media (max-width: 768px) {
-    padding: 1.2rem;
+    padding: 1rem;
     max-width: 100%;
   }
 `;

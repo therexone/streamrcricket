@@ -48,10 +48,7 @@ class MyDocument extends Document {
           <meta name="mobile-web-app-capable" content="yes" />
           <meta name="theme-color" content="#000000" />
           <link rel="manifest" href="/static/manifest.json" />
-          <meta
-            name="viewport"
-            content="minimum-scale=1, initial-scale=1, width=device-width, shrink-to-fit=no, user-scalable=no, viewport-fit=cover"
-          />
+         
 
           <link rel="preconnect" href="https://fonts.googleapis.com" />
           <link

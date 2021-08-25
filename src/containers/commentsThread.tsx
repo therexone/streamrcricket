@@ -1,3 +1,4 @@
+// import { useEffect } from "react";
 import CommentCard from "../components/commentCard";
 import MatchStats from "../components/matchStats";
 import { TComment } from "../utils/fetchComments";
@@ -13,6 +14,10 @@ const CommentsThread = ({
   comments,
   fetchBatches,
 }: TCommentsThreadProps) => {
+  // useEffect(() => {
+  //   window.scrollTo(0, 0);
+  // }, [comments]);
+
   return (
     <>
       <MatchStats matchStats={matchStats} />

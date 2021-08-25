@@ -1,10 +1,14 @@
+/* eslint-disable react/display-name */
 import type { NextPageContext } from "next";
 import Head from "next/head";
-import MatchThreads from "../src/containers/matchThreads";
+import dynamic from "next/dynamic";
+
+const MatchThreads = dynamic(() => import("../src/containers/matches"));
 import {
   getLiveCricketThreads,
   TThreadsDataType,
 } from "../src/utils/fetchLiveCricketThreads";
+import Loading from "../src/components/loading";
 
 const Home = ({ data }: { data: TThreadsDataType[] }) => {
   return (

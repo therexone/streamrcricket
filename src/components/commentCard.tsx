@@ -55,13 +55,13 @@ const CommentCard = ({
 };
 
 export const cardBaseStyles = css`
-  border-radius: 1rem;
+  border-radius: 0.8rem;
   width: 100%;
   background-color: #2a2e31;
   padding: 1.5rem 2rem;
-  margin-bottom: 1.2rem;
+  margin-bottom: 0.4rem;
   @media (max-width: 768px) {
-    padding: 1.2rem 1.5rem;
+    padding: 1.2rem 1.2rem;
   }
 `;
 
