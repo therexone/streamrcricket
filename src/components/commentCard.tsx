@@ -1,5 +1,6 @@
 import styled, { css } from "styled-components";
 import Emoji from "react-emoji-render";
+import MarkdownView from "react-showdown";
 
 type TCommentProps = {
   upvoteCount: number;
@@ -7,6 +8,7 @@ type TCommentProps = {
   flairText: string;
   commentText: string;
   createdUTC: number;
+  isLatest: boolean;
 };
 
 const CommentCard = ({
@@ -15,10 +17,15 @@ const CommentCard = ({
   flairText,
   commentText,
   createdUTC,
+  isLatest,
 }: TCommentProps) => {
   const timeString = new Date(createdUTC * 1000).toLocaleTimeString();
+
+  const [flairEmoji = "", flairContent = ""] =
+    flairText?.match(/:(.*?):/) ?? [];
+
   return (
-    <CardContainer>
+    <CardContainer isLatest={isLatest}>
       <UpvoteCount>
         <div>^</div>
         {upvoteCount}
@@ -26,11 +33,23 @@ const CommentCard = ({
 
       <MetaDataWrapper>
         <Username>{userName}</Username>
-        <Flair>{flairText && <Emoji text={flairText.toLowerCase()} />}</Flair>
+        <Flair>
+          <Emoji text={flairEmoji.toLowerCase()} /> {flairContent}
+        </Flair>
         <CommentTime>{timeString}</CommentTime>
       </MetaDataWrapper>
 
-      <Comment>{commentText}</Comment>
+      <Comment>
+        <MarkdownView
+          className="comment-markdown"
+          markdown={commentText}
+          options={{
+            emoji: true,
+            simplifiedAutoLink: true,
+            openLinksInNewWindow: true,
+          }}
+        />
+      </Comment>
     </CardContainer>
   );
 };
@@ -38,25 +57,23 @@ const CommentCard = ({
 export const cardBaseStyles = css`
   border-radius: 1rem;
   width: 100%;
-  max-width: 100%;
   background-color: #2a2e31;
   padding: 1.5rem 2rem;
   margin-bottom: 1.2rem;
   @media (max-width: 768px) {
-    padding: 1.2rem 1.8rem;
+    padding: 1.2rem 1.5rem;
   }
 `;
 
-const CardContainer = styled.div`
+const CardContainer = styled.div<{ isLatest: boolean }>`
   ${cardBaseStyles}
-  border-radius: 1rem;
-  background-color: #2a2e31;
   padding: 1.5rem 2rem;
+
+  ${(props) => props.isLatest && "background-color: #3c4146;"}
 
   display: grid;
   grid-template-columns: max-content auto;
   grid-template-rows: auto;
-  width: 100%;
   align-content: center;
 `;
 
@@ -74,9 +91,27 @@ const Username = styled.div`
 `;
 
 const Comment = styled.div`
-  font-size: 1.6rem;
-  @media (max-width: 768px) {
-    font-size: 1.3rem;
+  .comment-markdown {
+    h1,
+    h2,
+    h3,
+    ol {
+      margin: 0.5rem 0;
+      /* font-size: 105%; */
+    }
+    img {
+      height: 100%;
+      width: 50%;
+    }
+    p {
+      margin: 0;
+      word-break: break-word;
+    }
+    font-size: 1.6rem;
+    word-wrap: break-word;
+    @media (max-width: 768px) {
+      font-size: 1.3rem;
+    }
   }
 `;
 
@@ -96,9 +131,9 @@ const CommentTime = styled.div`
 const UpvoteCount = styled.div`
   grid-row: 1 / span 2;
   align-self: center;
-  margin-right: 1.2rem;
+  margin-right: 1rem;
   background-color: #212528;
-  padding: 0.5rem;
+  padding: 0.5rem 0.75rem;
   border-radius: 0.5rem;
 
   display: flex;
