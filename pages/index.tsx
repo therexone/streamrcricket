@@ -1,6 +1,6 @@
 import type { NextPageContext } from "next";
 import Head from "next/head";
-import MatchThreads from "../src/components/matchThreads";
+import MatchThreads from "../src/containers/matchThreads";
 import {
   getLiveCricketThreads,
   TThreadsDataType,

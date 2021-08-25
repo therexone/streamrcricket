@@ -5,12 +5,13 @@ import MarkdownView from "react-showdown";
 import { useRouter } from "next/router";
 
 import { TThreadsDataType } from "../utils/fetchLiveCricketThreads";
-import { cardBaseStyles } from "./commentCard";
-import Header from "./header";
+import { cardBaseStyles } from "../components/commentCard";
+import Header from "../components/header";
 
 const MatchThreadCard = styled.div`
   ${cardBaseStyles}
   margin-bottom: 1.2rem;
+  padding: 2rem !important;
 
   .markdown {
     p,
@@ -28,12 +29,15 @@ const ThreadTitle = styled.h2`
   margin-top: 0.8rem;
 `;
 
-const TodayTag = styled.span`
+type TTagTypes = "TODAY" | "POST_MATCH";
+
+const Tag = styled.span<{ type: TTagTypes }>`
   padding: 0.5rem;
   background-color: #212528;
   font-weight: 600;
-  color: #fd8610;
+  color: ${(props) => (props.type === "TODAY" ? "#fd8610;" : "#3c4146;")};
   border-radius: 0.5rem;
+  margin-right: 0.5rem;
 `;
 
 const MatchThreads = ({ threads }: { threads: TThreadsDataType[] }) => {
@@ -58,15 +62,19 @@ const MatchThreads = ({ threads }: { threads: TThreadsDataType[] }) => {
             });
           }}
         >
+          {title.includes("Post Match") ? (
+            <Tag type="POST_MATCH">POST MATCH</Tag>
+          ) : null}
+
           {new Date(createdUTC * 1000).getDate() === new Date().getDate() ? (
-            <TodayTag>TODAY</TodayTag>
+            <Tag type="TODAY">TODAY</Tag>
           ) : null}
 
           <ThreadTitle>{title}</ThreadTitle>
 
           <MarkdownView
             className="markdown"
-            markdown={selfText.substr(0, selfText.indexOf("*****"))}
+            markdown={selfText.slice(0, 400).concat("...")}
             options={{ tables: true, emoji: true }}
           />
         </MatchThreadCard>

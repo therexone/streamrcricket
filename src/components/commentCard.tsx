@@ -8,6 +8,7 @@ type TCommentProps = {
   flairText: string;
   commentText: string;
   createdUTC: number;
+  isLatest: boolean;
 };
 
 const CommentCard = ({
@@ -16,6 +17,7 @@ const CommentCard = ({
   flairText,
   commentText,
   createdUTC,
+  isLatest,
 }: TCommentProps) => {
   const timeString = new Date(createdUTC * 1000).toLocaleTimeString();
 
@@ -23,7 +25,7 @@ const CommentCard = ({
     flairText?.match(/:(.*?):/) ?? [];
 
   return (
-    <CardContainer>
+    <CardContainer isLatest={isLatest}>
       <UpvoteCount>
         <div>^</div>
         {upvoteCount}
@@ -38,7 +40,15 @@ const CommentCard = ({
       </MetaDataWrapper>
 
       <Comment>
-        <MarkdownView className="comment-markdown" markdown={commentText} />
+        <MarkdownView
+          className="comment-markdown"
+          markdown={commentText}
+          options={{
+            emoji: true,
+            simplifiedAutoLink: true,
+            openLinksInNewWindow: true,
+          }}
+        />
       </Comment>
     </CardContainer>
   );
@@ -55,11 +65,11 @@ export const cardBaseStyles = css`
   }
 `;
 
-const CardContainer = styled.div`
+const CardContainer = styled.div<{ isLatest: boolean }>`
   ${cardBaseStyles}
-  border-radius: 1rem;
-  background-color: #2a2e31;
   padding: 1.5rem 2rem;
+
+  ${(props) => props.isLatest && "background-color: #3c4146;"}
 
   display: grid;
   grid-template-columns: max-content auto;
@@ -82,8 +92,20 @@ const Username = styled.div`
 
 const Comment = styled.div`
   .comment-markdown {
+    h1,
+    h2,
+    h3,
+    ol {
+      margin: 0.5rem 0;
+      /* font-size: 105%; */
+    }
+    img {
+      height: 100%;
+      width: 50%;
+    }
     p {
       margin: 0;
+      word-break: break-word;
     }
     font-size: 1.6rem;
     word-wrap: break-word;
