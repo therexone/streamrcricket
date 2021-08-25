@@ -10,8 +10,7 @@ const Container = styled.div<{ headerSize: THeaderProps["headerSize"] }>`
   align-items: center;
   justify-content: center;
   position: relative;
-  margin-bottom: ${(props) =>
-    props.headerSize === "small" ? "0.4rem" : "1.2rem"};
+  margin-bottom: ${(props) => (props.headerSize === "small" ? "0" : "1.2rem")};
 
   h2 {
     font-size: 1.2rem;

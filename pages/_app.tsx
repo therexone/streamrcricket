@@ -12,7 +12,6 @@ const GlobalStyle = createGlobalStyle`
   background-color: #212528;
   color: white;
 
-  overflow-x: hidden;
 }
 
 a {
@@ -29,43 +28,6 @@ html {
   font-size: 62.5%;
 }
 
-.stats-markdown {
-  color: #ffffffe1;
-  width: 100%;
-  h3 {
-    font-size: 1.6rem;
-    color: #fdbc2c;
-    margin: 0;
-  }
-  p:last-of-type{
-    background-color: #fdbb2c4b;
-    padding: 0.4rem;
-    border-radius: 0.5rem;
-    color: #fdbc2c;
-    text-align: center;
-
-  }
-  margin-bottom: 1.2rem;
-  table {
-    display: inline-block;
-    margin: 0 0.8rem 0.4rem 0;
-    vertical-align: top;
-    thead {
-      background-color: #2a2e31;
-     
-    }
-    td, th {
-      padding: 0.2rem 0.4rem;
-
-    }
-  }
-  pre{
-    margin-bottom: 1rem;
-  }
-  @media (min-width: 768px) {
-   font-size: 110%;
-  }
-}
 `;
 
 const theme = {
