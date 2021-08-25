@@ -46,7 +46,7 @@ const ThreadPage = () => {
   if (isError) return <div>{String(error)}</div>;
 
   return (
-    <div>
+    <>
       <Header headerSize="small">
         <h2>streamrcricket</h2>
         {isFetching && <code> {"<>"}</code>}
@@ -71,7 +71,7 @@ const ThreadPage = () => {
           createdUTC={createdUTC}
         />
       ))}
-    </div>
+    </>
   );
 };
 

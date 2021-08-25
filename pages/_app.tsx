@@ -17,7 +17,7 @@ const GlobalStyle = createGlobalStyle`
 
 a {
    color: inherit;
-  text-decoration: none;
+  /* text-decoration: none; */
 }
 
 * {
@@ -97,7 +97,7 @@ function MyApp({ Component, pageProps }: AppProps) {
   return (
     <QueryClientProvider client={queryClient}>
       <GlobalStyle />
-      <GlobalWrapper>
+      <GlobalWrapper className="nru">
         <ThemeProvider theme={theme}>
           <Component {...pageProps} />
         </ThemeProvider>
