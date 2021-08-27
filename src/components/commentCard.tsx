@@ -9,6 +9,7 @@ type TCommentProps = {
   commentText: string;
   createdUTC: number;
   isLatest: boolean;
+  repliesData: string[];
 };
 
 const CommentCard = ({
@@ -18,8 +19,15 @@ const CommentCard = ({
   commentText,
   createdUTC,
   isLatest,
+  repliesData,
 }: TCommentProps) => {
   const timeString = new Date(createdUTC * 1000).toLocaleTimeString();
+
+  console.log(
+    "%ccommentCard.tsx line:26 repliesData",
+    "color: #26bfa5;",
+    repliesData
+  );
 
   const [flairEmoji = "", flairContent = ""] =
     flairText?.match(/:(.*?):/) ?? [];

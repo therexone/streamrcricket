@@ -5,6 +5,7 @@ export type TComment = {
   author: string;
   upvotes: number;
   id: string;
+  repliesData: string[];
 };
 
 export type TThreadData = {
@@ -35,7 +36,13 @@ const fetchComments = async (threadId: string): Promise<TThreadData> => {
       "(https://media4.giphy.com/media/$2/giphy.gif)"
     );
 
+    const replies =
+      typeof data.replies === "object"
+        ? data.replies.children.data.children
+        : [];
+
     return {
+      repliesData: replies,
       content: modifiedContent,
       flair: data.author_flair_text,
       createdUTC: data.created_utc,
