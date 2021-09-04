@@ -3,6 +3,23 @@ import styled, { keyframes } from "styled-components";
 import Image from "next/image";
 import rcricketLogo from "../../public/static/image/rcricketsubimg.png";
 
+const Loading = ({ text }: { text: string }) => {
+  return (
+    <LoadingContainter>
+      <div className="image-wrapper">
+        <Image
+          className="loading"
+          src={rcricketLogo}
+          width="60"
+          height="60"
+          alt="r/cricket"
+        />
+      </div>
+      {text}
+    </LoadingContainter>
+  );
+};
+
 const bounceAnimation = keyframes`
  0% {
       transform: translateY(0);
@@ -30,22 +47,5 @@ const LoadingContainter = styled.div`
     animation: ${bounceAnimation} ease infinite 1s;
   }
 `;
-
-const Loading = ({ text }: { text: string }) => {
-  return (
-    <LoadingContainter>
-      <div className="image-wrapper">
-        <Image
-          className="loading"
-          src={rcricketLogo}
-          width="60"
-          height="60"
-          alt="r/cricket"
-        />
-      </div>
-      {text}
-    </LoadingContainter>
-  );
-};
 
 export default Loading;

@@ -5,6 +5,27 @@ import styled from "styled-components";
 import rcricketLogo from "../../public/static/image/rcricketsubimg.png";
 import { useRouter } from "next/router";
 
+type THeaderProps = {
+  children: ReactNode;
+  headerSize?: "small" | "normal";
+};
+const Header = ({ children, headerSize = "normal" }: THeaderProps) => {
+  const router = useRouter();
+
+  const logoDimensions =
+    headerSize === "small"
+      ? { width: "30", height: "30" }
+      : { width: "60", height: "60" };
+
+  return (
+    <Container headerSize={headerSize} onClick={() => router.push("/")}>
+      <Image src={rcricketLogo} {...logoDimensions} alt="r/cricket" />
+
+      {children}
+    </Container>
+  );
+};
+
 const Container = styled.div<{ headerSize: THeaderProps["headerSize"] }>`
   display: flex;
   align-items: center;
@@ -21,24 +42,5 @@ const Container = styled.div<{ headerSize: THeaderProps["headerSize"] }>`
     right: 1rem;
   }
 `;
-
-type THeaderProps = {
-  children: ReactNode;
-  headerSize?: "small" | "normal";
-};
-const Header = ({ children, headerSize = "normal" }: THeaderProps) => {
-  const router = useRouter();
-  const logoDimensions =
-    headerSize === "small"
-      ? { width: "30", height: "30" }
-      : { width: "60", height: "60" };
-  return (
-    <Container headerSize={headerSize} onClick={() => router.push("/")}>
-      <Image src={rcricketLogo} {...logoDimensions} alt="r/cricket" />
-
-      {children}
-    </Container>
-  );
-};
 
 export default Header;

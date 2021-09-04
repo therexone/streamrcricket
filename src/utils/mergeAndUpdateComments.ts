@@ -1,4 +1,3 @@
-// Take the existing comments and merge with new comments -> final -> new comments + merged comments + untouched comments
 
 import { TComment } from "./fetchComments";
 
@@ -6,20 +5,23 @@ const mergeCommentsUpdate = (
   initialComments: TComment[],
   commentsUpdate: TComment[]
 ): [string[], TComment[]] => {
-  const newCommentIds = diffCommentIds(initialComments, commentsUpdate);
+  const [newCommentIds, updatedCommentIds] = diffCommentIds(
+    initialComments,
+    commentsUpdate
+  );
 
   const updatedComments: TComment[] = [];
 
   const newComments = commentsUpdate.filter((c, i) => {
-    if (c.id !== newCommentIds[i]) {
-      updatedComments.push(c);
-      return false;
+    if (c.id === newCommentIds[i]) {
+      return true;
     }
-    return true;
+    updatedComments.push(c);
+    return false;
   });
 
   const remainingComments = initialComments.filter(
-    (c, i) => c.id !== newCommentIds[i]
+    (c) => !updatedCommentIds.includes(c.id)
   );
 
   const finalComments = [
@@ -38,11 +40,16 @@ function diffCommentIds(
   const initialCommentIds = initialComments.map((ic) => ic.id);
   const commentsUpdateIds = commentsUpdate.map((cu) => cu.id);
 
-  const newIds = commentsUpdateIds.filter(
-    (id) => !initialCommentIds.includes(id)
-  );
+  const updateIds: string[] = [];
+  const newIds = commentsUpdateIds.filter((id) => {
+    if (!initialCommentIds.includes(id)) {
+      return true;
+    }
+    updateIds.push(id);
+    return false;
+  });
 
-  return newIds;
+  return [newIds, updateIds];
 }
 
 export default mergeCommentsUpdate;

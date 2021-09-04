@@ -5,7 +5,8 @@ export type TComment = {
   author: string;
   upvotes: number;
   id: string;
-  repliesData: string[];
+  repliesData?: TComment[];
+  more?: string[];
 };
 
 export type TThreadData = {
@@ -28,32 +29,46 @@ const fetchComments = async (threadId: string): Promise<TThreadData> => {
   const data = await response.json();
   const matchStats: string = data[0].data.children[0].data.selftext;
 
-  const comments: TComment[] = data[1].data.children.map(({ data }: any) => {
-    // 🚧 Replace reddit giphy markdown url
-
-    const modifiedContent = data.body?.replace(
-      /\(giphy\|(.*?)\|?(.*?)\)/,
-      "(https://media4.giphy.com/media/$2/giphy.gif)"
-    );
-
-    const replies =
-      typeof data.replies === "object"
-        ? data.replies.children.data.children
-        : [];
-
-    return {
-      repliesData: replies,
-      content: modifiedContent,
-      flair: data.author_flair_text,
-      createdUTC: data.created_utc,
-      author: data.author,
-      upvotes: data.ups,
-      id: data.id,
-    };
-  });
+  const comments: TComment[] = data[1].data.children.map(
+    ({ data: commentData }: any) =>
+      extractRevelantInfoFromCommentData(commentData)
+  );
 
   // last element has everything undefined
   return { matchStats, comments: comments.slice(0, -1) };
 };
 
-export { fetchComments };
+const extractRevelantInfoFromCommentData = (commentData: any) => {
+  const repliesData = commentData.replies?.data?.children;
+
+  const replies: TComment[] = [];
+  const more: string[] = [];
+  if (repliesData) {
+    repliesData.forEach((r: any) => {
+      if (r.kind === "t1") {
+        replies.push(extractRevelantInfoFromCommentData(r.data));
+      }
+      if (r.kind === "more") {
+        more.push(...r.data.children);
+      }
+    });
+  }
+
+  const modifiedContent = commentData.body?.replace(
+    /\(giphy\|(.*?)\|?(.*?)\)/,
+    "(https://media4.giphy.com/media/$2/giphy.gif)"
+  );
+
+  return {
+    content: modifiedContent,
+    repliesData: replies,
+    flair: commentData.author_flair_text,
+    createdUTC: commentData.created_utc,
+    author: commentData.author,
+    upvotes: commentData.ups,
+    id: commentData.id,
+    more,
+  };
+};
+
+export { fetchComments, extractRevelantInfoFromCommentData };

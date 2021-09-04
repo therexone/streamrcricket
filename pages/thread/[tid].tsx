@@ -13,6 +13,7 @@ const ThreadPage = () => {
   const router = useRouter();
   const [comments, setComments] = useState<TComment[]>([]);
   const { tid } = router.query;
+
   const {
     isLoading,
     isError,
@@ -21,6 +22,7 @@ const ThreadPage = () => {
     isFetching,
   } = useQuery(["threadData", tid], () => fetchComments(tid as string), {
     refetchInterval: 60000,
+    enabled: !!tid,
   });
 
   const fetchBatchesRef = useRef<string[][]>([]).current;
@@ -37,10 +39,15 @@ const ThreadPage = () => {
       fetchBatchesRef.push(newCommentIds);
 
       setComments(finalComments);
+      // console.log(
+      //   "%c[tid].tsx line:38 newComments",
+      //   "color: #007acc;",
+      //   newCommentIds
+      // );
       console.log(
-        "%c[tid].tsx line:38 newComments",
-        "color: #007acc;",
-        newCommentIds
+        "%c[tid].tsx line:47 finalComments",
+        "color: white; background-color: #26bfa5;",
+        finalComments.map((f) => f.id)
       );
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
