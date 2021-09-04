@@ -4,11 +4,15 @@ import styled from "styled-components";
 
 const MatchStats = ({ matchStats }: { matchStats: string }) => {
   const [isStatsPinned, setIsStatsPinned] = useState(false);
+
+  // Expects certain formatting
+  const trimmedStats = matchStats.slice(0, matchStats.indexOf("*****"));
+
   return (
     <MatchInfoContainer pinned={isStatsPinned}>
       <MarkdownView
         className="stats-markdown"
-        markdown={matchStats}
+        markdown={trimmedStats ? trimmedStats : matchStats}
         options={{
           tables: true,
           emoji: true,

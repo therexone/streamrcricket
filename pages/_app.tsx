@@ -1,6 +1,6 @@
 import type { AppProps } from "next/app";
 import styled, { createGlobalStyle, ThemeProvider } from "styled-components";
-import { QueryClient, QueryClientProvider, useQuery } from "react-query";
+import { QueryClient, QueryClientProvider } from "react-query";
 
 const GlobalStyle = createGlobalStyle`
   html,
@@ -17,7 +17,6 @@ const GlobalStyle = createGlobalStyle`
 
 a {
    color: inherit;
-  /* text-decoration: none; */
 }
 
 * {

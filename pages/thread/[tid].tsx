@@ -7,11 +7,13 @@ import Header from "../../src/components/header";
 import Loading from "../../src/components/loading";
 const CommentsThread = dynamic(import("../../src/containers/commentsThread"));
 import { fetchComments, TComment } from "../../src/utils/fetchComments";
+import mergeCommentsUpdate from "../../src/utils/mergeAndUpdateComments";
 
 const ThreadPage = () => {
   const router = useRouter();
   const [comments, setComments] = useState<TComment[]>([]);
   const { tid } = router.query;
+
   const {
     isLoading,
     isError,
@@ -20,32 +22,32 @@ const ThreadPage = () => {
     isFetching,
   } = useQuery(["threadData", tid], () => fetchComments(tid as string), {
     refetchInterval: 60000,
+    enabled: !!tid,
   });
 
   const fetchBatchesRef = useRef<string[][]>([]).current;
 
   useEffect(() => {
     if (threadData && threadData.comments.length > 0) {
-      const newCommentIds = threadData.comments.map((c) => c.id);
-      const oldCommentsIds = comments.map((c) => c.id);
-      const commentsDiff = newCommentIds.filter(
-        (id) => !oldCommentsIds.includes(id)
-      );
-      console.log(commentsDiff);
-
-      if (commentsDiff.length === 0) return;
-
-      fetchBatchesRef.push(commentsDiff);
-
-      const newComments = threadData.comments.filter(
-        (comment, i) => comment.id === commentsDiff[i]
+      const [newCommentIds, finalComments] = mergeCommentsUpdate(
+        comments,
+        threadData.comments
       );
 
-      setComments((c) => [...newComments, ...c]);
+      if (newCommentIds.length === 0) return;
+
+      fetchBatchesRef.push(newCommentIds);
+
+      setComments(finalComments);
+      // console.log(
+      //   "%c[tid].tsx line:38 newComments",
+      //   "color: #007acc;",
+      //   newCommentIds
+      // );
       console.log(
-        "%c[tid].tsx line:38 newComments",
-        "color: #007acc;",
-        newComments
+        "%c[tid].tsx line:47 finalComments",
+        "color: white; background-color: #26bfa5;",
+        finalComments.map((f) => f.id)
       );
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps

@@ -8,44 +8,13 @@ import { TThreadsDataType } from "../utils/fetchLiveCricketThreads";
 import { cardBaseStyles } from "../components/commentCard";
 import Header from "../components/header";
 
-const MatchThreadCard = styled.div`
-  ${cardBaseStyles}
-  margin-bottom: 1.2rem;
-  padding: 2rem !important;
-
-  .markdown {
-    p,
-    table {
-      color: #ffffffdd;
-    }
-    h3 {
-      color: #fdbc2c;
-    }
-  }
-`;
-
-const ThreadTitle = styled.h2`
-  font-size: 1.6rem;
-  margin-top: 0.8rem;
-`;
-
-type TTagTypes = "TODAY" | "POST_MATCH";
-
-const Tag = styled.span<{ type: TTagTypes }>`
-  padding: 0.5rem;
-  background-color: #212528;
-  font-weight: 600;
-  color: ${(props) => (props.type === "TODAY" ? "#fd8610;" : "#3c4146;")};
-  border-radius: 0.5rem;
-  margin-right: 0.5rem;
-`;
-
 const Matches = ({ threads }: { threads: TThreadsDataType[] }) => {
   const router = useRouter();
 
   if (threads.length === 0) {
     return <code>No crickets threads found :/</code>;
   }
+
   return (
     <>
       <Header>
@@ -82,5 +51,37 @@ const Matches = ({ threads }: { threads: TThreadsDataType[] }) => {
     </>
   );
 };
+
+const MatchThreadCard = styled.div`
+  ${cardBaseStyles}
+  margin-bottom: 1.2rem;
+  padding: 2rem !important;
+
+  .markdown {
+    p,
+    table {
+      color: #ffffffdd;
+    }
+    h3 {
+      color: #fdbc2c;
+    }
+  }
+`;
+
+const ThreadTitle = styled.h2`
+  font-size: 1.6rem;
+  margin-top: 0.8rem;
+`;
+
+type TTagTypes = "TODAY" | "POST_MATCH";
+
+const Tag = styled.span<{ type: TTagTypes }>`
+  padding: 0.5rem;
+  background-color: #212528;
+  font-weight: 600;
+  color: ${(props) => (props.type === "TODAY" ? "#fd8610;" : "#3c4146;")};
+  border-radius: 0.5rem;
+  margin-right: 0.5rem;
+`;
 
 export default Matches;
