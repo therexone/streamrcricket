@@ -6,7 +6,7 @@
 ## Todos -
 - [ ] Figure out pinned comments
 - [x] ~~Diff newer comments and highlight them~~
-- [ ] Implement replies
+- [x] ~~Implement replies~~
 - [ ] Better scrolling
 - [ ] Login and commenting
 
