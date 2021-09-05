@@ -43,7 +43,7 @@ const GlobalWrapper = styled.div`
   align-items: center;
   flex-direction: column;
   justify-content: center;
-  padding: 2rem;
+  padding: 1rem 1.5rem;
   max-width: 80rem;
   width: 100%;
   margin: 0 auto;

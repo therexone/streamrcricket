@@ -9,6 +9,7 @@ const CommentsThread = dynamic(import("../../src/containers/commentsThread"));
 import { fetchComments, TComment } from "../../src/utils/fetchComments";
 import mergeCommentsUpdate from "../../src/utils/mergeAndUpdateComments";
 
+
 const ThreadPage = () => {
   const router = useRouter();
   const [comments, setComments] = useState<TComment[]>([]);
@@ -39,16 +40,6 @@ const ThreadPage = () => {
       fetchBatchesRef.push(newCommentIds);
 
       setComments(finalComments);
-      // console.log(
-      //   "%c[tid].tsx line:38 newComments",
-      //   "color: #007acc;",
-      //   newCommentIds
-      // );
-      console.log(
-        "%c[tid].tsx line:47 finalComments",
-        "color: white; background-color: #26bfa5;",
-        finalComments.map((f) => f.id)
-      );
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [threadData]);
@@ -60,8 +51,7 @@ const ThreadPage = () => {
   return (
     <>
       <Header headerSize="small">
-        <h2>streamrcricket</h2>
-        {isFetching && <code> {"<>"}</code>}
+        <h2>streamr/cricket</h2>
       </Header>
 
       <CommentsThread
