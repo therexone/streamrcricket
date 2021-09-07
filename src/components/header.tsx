@@ -14,24 +14,34 @@ const Header = ({ children, headerSize = "normal" }: THeaderProps) => {
 
   const logoDimensions =
     headerSize === "small"
-      ? { width: "30", height: "30" }
-      : { width: "60", height: "60" };
+      ? { width: "25", height: "25" }
+      : { width: "40", height: "40" };
 
   return (
-    <Container headerSize={headerSize} onClick={() => router.push("/")}>
-      <Image src={rcricketLogo} {...logoDimensions} alt="r/cricket" />
+    <Container headerSize={headerSize}>
+      <Image
+        src={rcricketLogo}
+        {...logoDimensions}
+        alt="r/cricket"
+        onClick={() => router.push("/")}
+      />
 
       {children}
     </Container>
   );
 };
 
-const Container = styled.div<{ headerSize: THeaderProps["headerSize"] }>`
+const Container = styled.header<{ headerSize: THeaderProps["headerSize"] }>`
+  width: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
-  position: relative;
+
   margin-bottom: ${(props) => (props.headerSize === "small" ? "0" : "1.2rem")};
+
+  div {
+    margin-left: auto;
+  }
 
   h2 {
     font-size: 1.2rem;

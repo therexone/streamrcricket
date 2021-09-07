@@ -30,20 +30,12 @@ html {
 
 `;
 
-const theme = {
-  colors: {
-    bg: "#212528",
-    bgLight: "#2a2e31",
-    primary: "#fd8610;",
-  },
-};
-
 const GlobalWrapper = styled.div`
   display: flex;
   align-items: center;
   flex-direction: column;
   justify-content: center;
-  padding: 2rem;
+  padding: 1rem 1.5rem;
   max-width: 80rem;
   width: 100%;
   margin: 0 auto;
@@ -60,9 +52,7 @@ function MyApp({ Component, pageProps }: AppProps) {
     <QueryClientProvider client={queryClient}>
       <GlobalStyle />
       <GlobalWrapper className="nru">
-        <ThemeProvider theme={theme}>
-          <Component {...pageProps} />
-        </ThemeProvider>
+        <Component {...pageProps} />
       </GlobalWrapper>
     </QueryClientProvider>
   );

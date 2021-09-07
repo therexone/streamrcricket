@@ -1,11 +1,6 @@
 import { extractRevelantInfoFromCommentData } from "./fetchComments";
 
 const fetchReplies = async (threadId: string, commentId: string) => {
-  console.log(
-    "%cHello fetchReplies.tsx line:4 ",
-    "background: green; color: white; display: block;"
-  );
-
   try {
     const response = await fetch(
       `https://www.reddit.com/comments/${threadId}/_/${commentId}.json`,

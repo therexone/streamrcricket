@@ -5,7 +5,7 @@
 
 
 ## Todos -
-- [ ] Figure out pinned comments
+- [ ] Figure out pinned comments 
 - [x] ~~Diff newer comments and highlight them~~
 - [x] ~~Implement replies~~
 - [ ] Better scrolling (?)
