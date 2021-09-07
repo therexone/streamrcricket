@@ -1,13 +1,14 @@
 # stream-r/Cricket
 [ _IN PROGRESS_ ] PWA to view live r/Cricket threads conveniently.
 
-<img width="250" src="https://user-images.githubusercontent.com/27387245/129490475-c9c8fbdd-d417-4976-ad76-59063418d288.jpg"/> <img width="250" src="https://user-images.githubusercontent.com/27387245/129490476-2db0f7d8-f2b2-45ae-ab74-d17816859e4e.jpg"/>
+<img width="250" src="https://user-images.githubusercontent.com/27387245/132201393-92f3d8c2-1e72-4ba3-abf8-05f4bdeafba5.png"/> <img width="250" src="https://user-images.githubusercontent.com/27387245/132201256-92862bdd-a1ef-404e-ab31-c8752ea3f412.png"/>
+
 
 ## Todos -
-- [ ] Figure out pinned comments
+- [ ] Figure out pinned comments 
 - [x] ~~Diff newer comments and highlight them~~
-- [ ] Implement replies
-- [ ] Better scrolling
+- [x] ~~Implement replies~~
+- [ ] Better scrolling (?)
 - [ ] Login and commenting
 
 ## Getting Started

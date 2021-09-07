@@ -13,14 +13,6 @@ const CommentsThread = ({
   comments,
   fetchBatches,
 }: TCommentsThreadProps) => {
-  // useEffect(() => {
-  //   window.scrollTo(0, 0);
-  // }, [comments]);
-  // console.log(
-  //   "%ccommentsThread.tsx line:25 comments",
-  //   "color: #007acc;",
-  //   comments.map((c) => c.id)
-  // );
 
   return (
     <>
@@ -42,3 +34,4 @@ const CommentsThread = ({
 };
 
 export default CommentsThread;
+

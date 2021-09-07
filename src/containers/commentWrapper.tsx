@@ -24,7 +24,6 @@ const CommentWrapper = ({
 
   const {
     data: replies,
-    error,
     refetch,
     isLoading,
   } = useQuery(comment.id, () => fetchReplies(tid as string, comment.id), {
