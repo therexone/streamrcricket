@@ -1,9 +1,12 @@
-import styled, { css, keyframes } from "styled-components";
+import styled, { css } from "styled-components";
 import Emoji from "react-emoji-render";
 import MarkdownView from "react-showdown";
-import { TComment } from "../utils/fetchComments";
 import { RefetchOptions, QueryObserverResult } from "react-query";
-import RefreshSvg from "../svgs/refreshSvg";
+
+import { TComment } from "../utils/fetchComments";
+import RefreshButton from "./refreshButton";
+
+import { COLORS } from "../constants/colors";
 
 interface TCommentCardProps extends TComment {
   isLatest?: boolean;
@@ -25,7 +28,6 @@ const CommentCard = ({
   className = "",
   refetch,
   isFetchingReplies,
-  id,
 }: TCommentCardProps) => {
   const timeString = new Date(createdUTC * 1000).toLocaleTimeString();
 
@@ -49,12 +51,7 @@ const CommentCard = ({
 
         <CommentTime>{timeString}</CommentTime>
 
-        <RefreshIcon
-          onClick={() => refetch()}
-          isFetchingReplies={isFetchingReplies}
-        >
-          <RefreshSvg />
-        </RefreshIcon>
+        <RefreshButton isFetching={isFetchingReplies} onClick={refetch} />
       </MetaDataWrapper>
 
       <Comment>
@@ -75,7 +72,7 @@ const CommentCard = ({
 export const cardBaseStyles = css`
   border-radius: 0.8rem;
   width: 100%;
-  background-color: #2a2e31;
+  background-color: ${COLORS.cardBg};
   padding: 1.5rem 2rem;
   margin-bottom: 0.4rem;
   @media (max-width: 768px) {
@@ -105,7 +102,7 @@ const MetaDataWrapper = styled.div`
 const Username = styled.div`
   font-weight: 600;
   font-size: rem;
-  color: #fd8610;
+  color: ${COLORS.primary};
   font-size: 1.2rem;
 `;
 
@@ -116,7 +113,6 @@ const Comment = styled.div`
     h3,
     ol {
       margin: 0.5rem 0;
-      /* font-size: 105%; */
     }
     img {
       height: 100%;
@@ -128,7 +124,7 @@ const Comment = styled.div`
     }
     font-size: 1.3rem;
     word-wrap: break-word;
-    color: #ffffffd6;
+    color: ${COLORS.textPrimary};
     @media (max-width: 768px) {
       font-size: 1.2rem;
       line-height: 1.4;
@@ -140,13 +136,13 @@ const Flair = styled.div`
   margin-top: 0.1rem;
   font-size: 0.8rem;
   margin-left: 0.4rem;
-  color: #ffffffc5;
+  color: ${COLORS.textSecondary};
   max-width: 30%;
   flex-shrink: 1;
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
-  background-color: #212528;
+  background-color: ${COLORS.bg};
   padding: 0.2rem 0.4rem;
   border-radius: 0.5rem;
 `;
@@ -158,29 +154,11 @@ const CommentTime = styled.div`
   margin-right: 0.8rem;
 `;
 
-const spinAnimation = keyframes` 
-100% { 
-   transform:rotate(360deg); 
-   } 
-`;
-
-const RefreshIcon = styled.div<{ isFetchingReplies: boolean }>`
-  svg {
-    ${(props) =>
-      props.isFetchingReplies &&
-      css`
-        animation: ${spinAnimation} 0.5s linear infinite;
-      `}
-    width: 1rem;
-    fill: #ffffff7f;
-  }
-`;
-
 const UpvoteCount = styled.div`
   grid-row: 1 / span 2;
   align-self: center;
   margin-right: 1rem;
-  background-color: #212528;
+  background-color: ${COLORS.bg};
   padding: 0.5rem 0.75rem;
   border-radius: 0.5rem;
 

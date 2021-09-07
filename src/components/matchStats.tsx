@@ -1,13 +1,28 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import MarkdownView from "react-showdown";
 import styled from "styled-components";
+import { COLORS } from "../constants/colors";
+import { GlobalSettingsContext } from "../context/globalSettingsProvider";
 import PinSvg from "../svgs/pinSvg";
 
 const MatchStats = ({ matchStats }: { matchStats: string }) => {
   const [isStatsPinned, setIsStatsPinned] = useState(false);
+  const context = useContext(GlobalSettingsContext);
 
   // Expects certain formatting
   const trimmedStats = matchStats.slice(0, matchStats.indexOf("*****"));
+
+  if (!context?.showMatchStats) {
+    const heading = matchStats.match(/###(.*)/)?.[0] || "";
+    return (
+      <MatchInfoContainer>
+        <MarkdownView
+          className="stats-markdown heading-only"
+          markdown={heading}
+        />
+      </MatchInfoContainer>
+    );
+  }
 
   return (
     <MatchInfoContainer pinned={isStatsPinned}>
@@ -21,6 +36,7 @@ const MatchStats = ({ matchStats }: { matchStats: string }) => {
           openLinksInNewWindow: true,
         }}
       />
+
       <PinStats
         onClick={() => setIsStatsPinned((p) => !p)}
         pinned={isStatsPinned}
@@ -31,7 +47,7 @@ const MatchStats = ({ matchStats }: { matchStats: string }) => {
   );
 };
 
-const MatchInfoContainer = styled.div<{ pinned: boolean }>`
+const MatchInfoContainer = styled.div<{ pinned?: boolean }>`
   position: ${(props) => (props.pinned ? "sticky;" : "static;")};
   top: -1px;
 
@@ -40,13 +56,17 @@ const MatchInfoContainer = styled.div<{ pinned: boolean }>`
   background-color: #212528;
   padding: 0.5rem 0.2rem 0;
 
+  .heading-only {
+    margin: 1rem;
+  }
+
   .stats-markdown {
     color: #ffffffe1;
     width: 100%;
 
     h3 {
       font-size: 1.6rem;
-      color: #fdbc2c;
+      color: ${COLORS.secondary};
       margin: 0;
     }
     p {
@@ -60,22 +80,23 @@ const MatchInfoContainer = styled.div<{ pinned: boolean }>`
       color: #fdbc2c;
       text-align: center;
     }
-    /* margin-bottom: 1.2rem; */
+
     table {
       display: inline-block;
       margin: 0 0.8rem 0.4rem 0;
       vertical-align: top;
-      border: 1px solid #2a2e31;
+      border: 1px solid ${COLORS.cardBg};
       thead {
-        background-color: #2a2e31;
+        background-color: ${COLORS.cardBg};
       }
       td,
       th {
-        border: 0.5px solid #2a2e31;
+        border: 0.5px solid ${COLORS.cardBg};
 
         padding: 0.2rem 0.4rem;
       }
     }
+
     pre {
       margin-bottom: 1rem;
     }

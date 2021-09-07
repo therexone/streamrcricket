@@ -14,9 +14,12 @@ export type TThreadData = {
   comments: TComment[];
 };
 
-const fetchComments = async (threadId: string): Promise<TThreadData> => {
+const fetchComments = async (
+  threadId: string,
+  sort: "new" | "top" = "new"
+): Promise<TThreadData> => {
   const response = await fetch(
-    `https://www.reddit.com/comments/${threadId}.json?sort=new&limit=20`,
+    `https://www.reddit.com/comments/${threadId}.json?sort=${sort}&limit=20`,
     {
       method: "GET",
       mode: "cors",

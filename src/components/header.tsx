@@ -15,7 +15,7 @@ const Header = ({ children, headerSize = "normal" }: THeaderProps) => {
   const logoDimensions =
     headerSize === "small"
       ? { width: "25", height: "25" }
-      : { width: "60", height: "60" };
+      : { width: "40", height: "40" };
 
   return (
     <Container headerSize={headerSize}>
@@ -38,10 +38,6 @@ const Container = styled.header<{ headerSize: THeaderProps["headerSize"] }>`
   justify-content: center;
 
   margin-bottom: ${(props) => (props.headerSize === "small" ? "0" : "1.2rem")};
-/* 
-  background-color: #2a2e31;
-  padding: 0.1rem 0.5rem;
-  border-radius: 0.8rem; */
 
   div {
     margin-left: auto;

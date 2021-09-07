@@ -18,7 +18,7 @@ const Matches = ({ threads }: { threads: TThreadsDataType[] }) => {
   return (
     <>
       <Header>
-        <h1>r/Cricket Match Threads</h1>
+        <h2>r/Cricket Match Threads</h2>
       </Header>
 
       {threads.map(({ selfText, title, id, createdUTC }) => (
