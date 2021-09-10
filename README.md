@@ -3,8 +3,8 @@
 # stream-r/Cricket
 [ _IN PROGRESS_ ] PWA to view live r/Cricket threads conveniently.
 
-<img width="280" src="https://user-images.githubusercontent.com/27387245/132201393-92f3d8c2-1e72-4ba3-abf8-05f4bdeafba5.png"/> <img width="280" src="https://user-images.githubusercontent.com/27387245/132201256-92862bdd-a1ef-404e-ab31-c8752ea3f412.png"/>
-<img width="280" src="https://user-images.githubusercontent.com/27387245/132877992-8996168b-4c92-4a6f-88e7-a5624838ddf0.png"/>
+<img width="250" src="https://user-images.githubusercontent.com/27387245/132201393-92f3d8c2-1e72-4ba3-abf8-05f4bdeafba5.png"/> <img width="250" src="https://user-images.githubusercontent.com/27387245/132201256-92862bdd-a1ef-404e-ab31-c8752ea3f412.png"/>
+<img width="250" src="https://user-images.githubusercontent.com/27387245/132877992-8996168b-4c92-4a6f-88e7-a5624838ddf0.png"/>
 
 
 ## Todos -
