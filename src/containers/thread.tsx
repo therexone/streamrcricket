@@ -1,15 +1,20 @@
 import React, { useState, useRef, useEffect, useContext } from "react";
 import { useRouter } from "next/router";
 import { useQuery } from "react-query";
+import styled from "styled-components";
+import dynamic from "next/dynamic";
+
 import { TComment, fetchComments } from "../utils/fetchComments";
 import mergeCommentsUpdate from "../utils/mergeAndUpdateComments";
 import Header from "../components/header";
 import Loading from "../components/loading";
 import Preferences from "../components/preferences";
-import CommentsThread from "./commentsThread";
+
+const CommentsThread = dynamic(() => import("./commentsThread"), {
+  ssr: false,
+});
 import { GlobalSettingsContext } from "../context/globalSettingsProvider";
 import RefreshButton from "../components/refreshButton";
-import styled from "styled-components";
 
 const Thread = () => {
   const context = useContext(GlobalSettingsContext);

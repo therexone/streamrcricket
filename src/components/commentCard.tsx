@@ -1,7 +1,8 @@
-import styled, { css, keyframes } from "styled-components";
+import styled, { css } from "styled-components";
 import Emoji from "react-emoji-render";
 import MarkdownView from "react-showdown";
 import { RefetchOptions, QueryObserverResult } from "react-query";
+import { LazyMotion, domAnimation, m } from "framer-motion";
 
 import { TComment } from "../utils/fetchComments";
 import RefreshButton from "./refreshButton";
@@ -34,38 +35,46 @@ const CommentCard = ({
   const [flairEmoji = "", flairContent = ""] = flair?.match(/:(.*?):/) ?? [];
 
   return (
-    <CardContainer isLatest={isLatest} className={className}>
-      <UpvoteCount>
-        <div>^</div>
-        {upvotes}
-      </UpvoteCount>
+    <LazyMotion features={domAnimation}>
+      <m.div
+        animate={{ opacity: 1 }}
+        transition={{ ease: "easeInOut", duration: 0.8 }}
+        initial={{ opacity: 0}}
+      >
+        <CardContainer isLatest={isLatest} className={className}>
+          <UpvoteCount>
+            <div>^</div>
+            {upvotes}
+          </UpvoteCount>
 
-      <MetaDataWrapper>
-        <Username>{author}</Username>
+          <MetaDataWrapper>
+            <Username>{author}</Username>
 
-        {flairContent ? (
-          <Flair>
-            <Emoji text={flairEmoji.toLowerCase()} /> {flairContent}
-          </Flair>
-        ) : null}
+            {flairContent ? (
+              <Flair>
+                <Emoji text={flairEmoji.toLowerCase()} /> {flairContent}
+              </Flair>
+            ) : null}
 
-        <CommentTime>{timeString}</CommentTime>
+            <CommentTime>{timeString}</CommentTime>
 
-        <RefreshButton isFetching={isFetchingReplies} onClick={refetch} />
-      </MetaDataWrapper>
+            <RefreshButton isFetching={isFetchingReplies} onClick={refetch} />
+          </MetaDataWrapper>
 
-      <Comment>
-        <MarkdownView
-          className="comment-markdown"
-          markdown={content}
-          options={{
-            emoji: true,
-            simplifiedAutoLink: true,
-            openLinksInNewWindow: true,
-          }}
-        />
-      </Comment>
-    </CardContainer>
+          <Comment>
+            <MarkdownView
+              className="comment-markdown"
+              markdown={content}
+              options={{
+                emoji: true,
+                simplifiedAutoLink: true,
+                openLinksInNewWindow: true,
+              }}
+            />
+          </Comment>
+        </CardContainer>
+      </m.div>
+    </LazyMotion>
   );
 };
 
