@@ -52,9 +52,10 @@ const MatchInfoContainer = styled.div<{ pinned?: boolean }>`
   top: -1px;
 
   display: flex;
+  width: 100%;
 
   background-color: #212528;
-  padding: 0.5rem 0.2rem 0;
+  padding: 0.75rem 0.2rem;
 
   .heading-only {
     margin: 1rem;
@@ -101,6 +102,8 @@ const MatchInfoContainer = styled.div<{ pinned?: boolean }>`
       margin-bottom: 1rem;
     }
     @media (min-width: 768px) {
+      padding: 0.5rem 0.2rem 0;
+
       font-size: 110%;
     }
   }
