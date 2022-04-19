@@ -37,6 +37,10 @@ const Container = styled.header<{ headerSize: THeaderProps["headerSize"] }>`
   align-items: center;
   justify-content: center;
 
+  img {
+    cursor: pointer;
+  }
+
   margin-bottom: ${(props) => (props.headerSize === "small" ? "0" : "1.2rem")};
 
   div {
