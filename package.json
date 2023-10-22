@@ -1,6 +1,6 @@
 {
   "name": "streamrcricket",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "private": true,
   "scripts": {
     "dev": "next dev",
@@ -12,7 +12,6 @@
     "framer-motion": "^5.5.5",
     "next": "12",
     "next-pwa": "^5.2.24",
-    "query": "^0.2.0",
     "react": "^17.0.2",
     "react-dom": "17.0.2",
     "react-emoji-render": "^1.2.4",

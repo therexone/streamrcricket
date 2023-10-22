@@ -74,12 +74,10 @@ const MatchInfoContainer = styled.div<{ pinned?: boolean }>`
       margin-top: 1rem;
     }
     p:last-of-type {
-      width: max-content;
       background-color: #fdbb2c4b;
       padding: 0.4rem 0.8rem;
       border-radius: 0.5rem;
       color: #fdbc2c;
-      text-align: center;
     }
 
     table {
